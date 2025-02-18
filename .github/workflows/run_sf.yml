@@ -25,13 +25,12 @@ jobs:
       - name: Run Python script
         run: python sf.py
 
-            - name: Commit and push CSV file
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit and push CSV file
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add sf.csv
           git commit -m "Update sf.csv" || exit 0
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
-
+          git push origin main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
